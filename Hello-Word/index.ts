@@ -10,7 +10,7 @@
 
 // obiektowo
 
-class Person {
+class Persona {
 	constructor(private imie: string, private nazwisko: string, private wiek: number) {}
 
 	public show() {
@@ -20,5 +20,5 @@ class Person {
 		input.appendChild(h1);
 	}
 }
-const p = new Person('Piotr', 'les', 21);
+const p = new Persona('Piotr', 'les', 21);
 p.show();
