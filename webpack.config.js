@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 require('dotenv').config();
 
 const config = {
-	entry: './temat2/src/app.ts',
+	entry: `./${process.env.CURRENT}/src/app.ts`,
 	mode: 'development',
 	module: {
 		rules: [
