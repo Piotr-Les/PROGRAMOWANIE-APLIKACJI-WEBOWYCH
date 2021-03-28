@@ -13,12 +13,34 @@ const config = {
 				use: 'ts-loader',
 				exclude: /node_modules/,
 			},
+			{
+				test: /\.s[ac]ss$/i,
+				use: [
+					// Creates `style` nodes from JS strings
+					{
+						loader: 'style-loader',
+						// options: {
+						//   // injectType: "singletonStyleTag"
+						//   // injectType: "linkTag"
+						// }
+					},
+					// Translates CSS into CommonJS
+					'css-loader',
+					// Compiles Sass to CSS
+					'sass-loader',
+				],
+			},
 		],
 	},
+
 	devtool: 'inline-source-map',
 	plugins: [
 		new CopyPlugin({
-			patterns: [{ from: `./${process.env.CURRENT}/src/index.html` }],
+			patterns: [
+				{ from: `./${process.env.CURRENT}/src/index.html` },
+				{ from: `./${process.env.CURRENT}/src/style.css` },
+				{ from: `./${process.env.CURRENT}/src/style.css.map` },
+			],
 		}),
 	],
 

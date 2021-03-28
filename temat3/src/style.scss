@@ -1,0 +1,31 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+// var declatarions
+$cell-size: 150px;
+$board-size: 3;
+$symbol-size: $cell-size * 0.8;
+
+.board {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	justify-items: center;
+
+	grid-template-columns: repeat($board-size, auto);
+	grid-template-rows: repeat($board-size, auto);
+}
+.cell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: $cell-size;
+	height: $cell-size;
+	cursor: pointer;
+	border: 0.1px solid #000;
+}
