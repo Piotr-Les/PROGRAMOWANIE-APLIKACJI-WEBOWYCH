@@ -19,10 +19,6 @@ const config = {
 					// Creates `style` nodes from JS strings
 					{
 						loader: 'style-loader',
-						// options: {
-						//   // injectType: "singletonStyleTag"
-						//   // injectType: "linkTag"
-						// }
 					},
 					// Translates CSS into CommonJS
 					'css-loader',
