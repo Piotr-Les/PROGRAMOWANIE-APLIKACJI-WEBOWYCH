@@ -4,3 +4,63 @@
 	box-sizing: border-box;
 	font-family: 'Roboto';
 }
+
+.menuCont {
+	width: 100%;
+	padding: 0 5%;
+
+	.gameList {
+		list-style: none;
+		display: flex;
+		justify-content: space-around;
+
+		.gameListElement {
+			text-align: center;
+			width: 200px;
+			padding: 10px;
+			letter-spacing: 0.1rem;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			&:hover {
+				background-color: #f4f4f4;
+			}
+		}
+	}
+}
+
+.gameCont {
+	padding: 4%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.TicTacToe {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	& > * {
+		margin: 10px;
+	}
+	.ticBoard {
+		background-color: black;
+
+		border: 1px solid black;
+		.ticRow {
+			width: 100%;
+			.ticCell {
+				background-color: white;
+				border: 1px solid black;
+				height: 100px;
+				width: 100px;
+
+				cursor: pointer;
+				text-align: center;
+				font-size: 2rem;
+			}
+		}
+	}
+}

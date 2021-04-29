@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Roboto';
+}
+
+.menuCont {
+  width: 100%;
+  padding: 0 5%;
+}
+
+.menuCont .gameList {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.menuCont .gameList .gameListElement {
+  text-align: center;
+  width: 200px;
+  padding: 10px;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.menuCont .gameList .gameListElement:hover {
+  background-color: #f4f4f4;
+}
+
+.gameCont {
+  padding: 4%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.TicTacToe {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.TicTacToe > * {
+  margin: 10px;
+}
+
+.TicTacToe .ticBoard {
+  background-color: black;
+  border: 1px solid black;
+}
+
+.TicTacToe .ticBoard .ticRow {
+  width: 100%;
+}
+
+.TicTacToe .ticBoard .ticRow .ticCell {
+  background-color: white;
+  border: 1px solid black;
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 2rem;
+}
+/*# sourceMappingURL=style.css.map */
