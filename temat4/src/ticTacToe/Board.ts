@@ -111,6 +111,7 @@ class Board {
 		resetButton.addEventListener('click', () => {
 			this.root.removeChild(endContianer);
 			this.root.removeChild(document.querySelector('.message')!);
+			this.isPlayerTurn = true;
 			this.initBoard(this.root, this.size);
 		});
 
@@ -123,6 +124,7 @@ class Board {
 	private initBoard(root: HTMLElement, size: number) {
 		const board = C.createElement('table', ['ticBoard']);
 		const mess = C.createElement('div', ['message']);
+		mess.textContent = `Ruch gracza ${this.handleSymbol()}`;
 
 		for (let i = 0; i < size; i++) {
 			const row = C.createElement('tr', ['ticRow']);
@@ -139,8 +141,12 @@ class Board {
 		}
 		if (root.childElementCount > 1) {
 			let element = document.querySelector('.ticBoard');
+			let mess = document.querySelector('.message');
 			if (element) {
-				root.removeChild(element!);
+				root.removeChild(element);
+			}
+			if (mess) {
+				root.removeChild(mess);
 			}
 		}
 
