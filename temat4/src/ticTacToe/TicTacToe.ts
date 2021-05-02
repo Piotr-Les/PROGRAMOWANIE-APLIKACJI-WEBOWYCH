@@ -1,8 +1,12 @@
 import { IGame } from '../IGame';
 import { Creator as C } from '../Creator';
 import { Board } from './Board';
+import { Disabled } from '../decorators/Disabled';
+import { GameLogger } from '../decorators/GameLogger';
 
+// @Disabled
 class TicTacToe implements IGame {
+	disabled!: boolean;
 	name: string;
 	size = 3;
 	static gameRoot = C.createElement('div', ['TicTacToe']);
@@ -13,9 +17,8 @@ class TicTacToe implements IGame {
 	setSize(e: Event) {
 		const target = e.target as HTMLInputElement;
 		this.size = +target.value;
-		console.log(this.size);
 	}
-
+	@GameLogger('TICTACTOE')
 	getGameElement(): HTMLElement {
 		TicTacToe.gameRoot.innerHTML = '';
 		const input = C.createElement('input') as HTMLInputElement;

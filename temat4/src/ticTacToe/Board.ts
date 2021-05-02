@@ -1,11 +1,12 @@
 import { Creator as C } from '../Creator';
 import Cell from './Cell';
 import EndGameType from './EndGameType';
+import { TotalBoardClicks } from '../decorators/TotalBoardClicks';
 class Board {
 	private cells: Cell[][];
 	private isPlayerTurn: boolean;
 	private root: HTMLElement;
-	private size: number;
+	private size: number = 3;
 
 	constructor(root: HTMLElement, size: number) {
 		this.cells = this.initCells(size);
@@ -43,6 +44,7 @@ class Board {
 		return a;
 	}
 
+	@TotalBoardClicks()
 	handleClick(e: Event) {
 		let target = e.target as HTMLTableCellElement;
 		if (target.textContent == '') {

@@ -19,17 +19,19 @@ class App {
 		const games = Object.values(GAMES);
 		games.forEach(gameObject => {
 			const game = Factory.getGame(gameObject);
-			const gameLi = C.createElement(
-				'li',
-				['gameListElement'],
-				undefined,
-				`${game.name}`
-			);
-			gameLi.addEventListener('click', () => {
-				gameContainer.innerHTML = '';
-				gameContainer.appendChild(game.getGameElement());
-			});
-			list.appendChild(gameLi);
+			if (game.disabled !== true) {
+				const gameLi = C.createElement(
+					'li',
+					['gameListElement'],
+					undefined,
+					`${game.name}`
+				);
+				gameLi.addEventListener('click', () => {
+					gameContainer.innerHTML = '';
+					gameContainer.appendChild(game.getGameElement());
+				});
+				list.appendChild(gameLi);
+			}
 		});
 
 		menuCont.appendChild(list);

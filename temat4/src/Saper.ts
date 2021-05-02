@@ -1,6 +1,7 @@
 import { IGame } from './IGame';
 
 class Saper implements IGame {
+	disabled!: boolean;
 	name: string;
 
 	constructor() {
