@@ -1,0 +1,27 @@
+:root {
+	--fontColor: #292b2c;
+	--hoverColor: #f4f4f4;
+	--bgColor: #fff;
+	--borderColor: #292b2c;
+	--cellValueColor: #292b2c;
+}
+
+[data-theme='dark'] {
+	--fontColor: #fff;
+	--hoverColor: rgb(125, 125, 125);
+	--bgColor: #292b2c;
+	--borderColor: #292b2c;
+}
+
+[data-theme='light'] {
+	--fontColor: #292b2c;
+	--hoverColor: #f4f4f4;
+	--bgColor: #fff;
+	--borderColor: #292b2c;
+}
+[data-theme='ocean'] {
+	--fontColor: #f4f4f4;
+	--hoverColor: #008dc5;
+	--bgColor: #006994;
+	--borderColor: #00435e;
+}

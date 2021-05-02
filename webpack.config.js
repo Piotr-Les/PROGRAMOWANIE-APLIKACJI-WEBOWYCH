@@ -17,9 +17,7 @@ const config = {
 				test: /\.s[ac]ss$/i,
 				use: [
 					// Creates `style` nodes from JS strings
-					{
-						loader: 'style-loader',
-					},
+					'style-loader',
 					// Translates CSS into CommonJS
 					'css-loader',
 					// Compiles Sass to CSS
@@ -34,8 +32,8 @@ const config = {
 		new CopyPlugin({
 			patterns: [
 				{ from: `./${process.env.CURRENT}/src/index.html` },
-				{ from: `./${process.env.CURRENT}/src/style.css` },
-				{ from: `./${process.env.CURRENT}/src/style.css.map` },
+				// { from: `./${process.env.CURRENT}/src/styles/style.css` },
+				// { from: `./${process.env.CURRENT}/src/styles/style.css.map` },
 			],
 		}),
 	],

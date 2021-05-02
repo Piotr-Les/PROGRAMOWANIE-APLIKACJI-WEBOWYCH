@@ -1,6 +1,9 @@
+import './styles/style.scss';
 import { Creator as C } from './Creator';
 import { GAMES } from './Games';
 import { GameFactory as Factory } from './GameFactory';
+import { Switcher } from './switcher/Switcher';
+
 class App {
 	private static root = document.getElementById('root') as HTMLDivElement;
 
@@ -28,7 +31,11 @@ class App {
 			});
 			list.appendChild(gameLi);
 		});
+
 		menuCont.appendChild(list);
+		const switcher = new Switcher().getSwitcherElement();
+		menuCont.appendChild(switcher);
+
 		App.root.appendChild(menuCont);
 		App.root.appendChild(gameContainer);
 	}

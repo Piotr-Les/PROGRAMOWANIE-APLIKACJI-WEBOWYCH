@@ -1,0 +1,26 @@
+@use 'colors';
+@use 'mixins';
+
+.menuCont {
+	width: 100%;
+	padding: 10px 5%;
+	display: flex;
+	justify-content: space-around;
+	background-color: var(--bgColor);
+	.gameList {
+		color: var(--fontColor);
+		width: 600px;
+		list-style: none;
+		display: flex;
+		justify-content: space-between;
+
+		.gameListElement {
+			text-align: center;
+			width: 200px;
+			padding: 10px;
+			letter-spacing: 0.1rem;
+
+			@include mixins.clickable();
+		}
+	}
+}
