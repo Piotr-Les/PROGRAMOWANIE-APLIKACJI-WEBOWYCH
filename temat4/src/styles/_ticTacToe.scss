@@ -48,3 +48,25 @@
 	cursor: pointer;
 	font-size: 2rem;
 }
+.localStCont {
+	@include mixins.flexCenter();
+	flex-direction: column;
+	.lsSave {
+		margin: 0.5rem;
+		padding: 0.2rem;
+		cursor: pointer;
+		border: 1px solid var(--borderColor);
+	}
+	.saveList {
+		list-style: none;
+		& > li {
+			margin: 0.2rem 0;
+			cursor: pointer;
+		}
+	}
+	.disabled {
+		cursor: not-allowed;
+		pointer-events: none;
+		color: gray !important;
+	}
+}

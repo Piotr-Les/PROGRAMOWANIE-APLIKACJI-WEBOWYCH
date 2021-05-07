@@ -2,19 +2,26 @@ import { Creator as C } from '../Creator';
 import Cell from './Cell';
 import EndGameType from './EndGameType';
 import { TotalBoardClicks } from '../decorators/TotalBoardClicks';
+import { LSUI } from '../SaveOrLoadGame/LSUI';
+import { GameState } from '../SaveOrLoadGame/LocalStorage';
 class Board {
-	private cells: Cell[][];
-	private isPlayerTurn: boolean;
+	public cells: Cell[][];
+	public isPlayerTurn: boolean;
 	private root: HTMLElement;
 	private size: number = 3;
-
+	public LS: LSUI;
+	private loading: boolean | undefined;
 	constructor(root: HTMLElement, size: number) {
 		this.cells = this.initCells(size);
-		this.isPlayerTurn = true;
-		this.initBoard(root, size);
-
 		this.root = root;
 		this.size = size;
+		this.isPlayerTurn = true;
+		this.LS = new LSUI(this);
+		this.initBoard(this.root, this.size);
+	}
+
+	getCells(): Cell[][] {
+		return this.cells;
 	}
 
 	handleSymbol = () => (this.isPlayerTurn ? 'X' : 'O');
@@ -44,6 +51,16 @@ class Board {
 		return a;
 	}
 
+	LoadBoardState(state: GameState) {
+		this.isPlayerTurn = state.playerTurn;
+		this.initBoard(this.root, this.size);
+		for (let i = 0; i < this.size; i++) {
+			for (let k = 0; k < this.size; k++) {
+				this.cells[i][k].setCellValue(state.cells[i][k].cellValue);
+				this.cells[i][k].htmlElement.textContent = state.cells[i][k].cellValue;
+			}
+		}
+	}
 	@TotalBoardClicks()
 	handleClick(e: Event) {
 		let target = e.target as HTMLTableCellElement;
@@ -51,7 +68,8 @@ class Board {
 			let symbol = this.handleSymbol();
 			let cell = this.getCell(target);
 			cell!.setCellValue(symbol);
-			target.textContent = symbol;
+			target.textContent = cell!.cellValue;
+
 			if (this.isWin()) {
 				this.handleEndGame(EndGameType.WIN);
 			} else if (this.isDraw()) {
@@ -60,6 +78,8 @@ class Board {
 
 			this.isPlayerTurn = !this.isPlayerTurn;
 			this.handleTurnInfo();
+
+			this.LS.setCells(this.cells);
 		}
 	}
 	isWin() {
@@ -127,14 +147,14 @@ class Board {
 		const board = C.createElement('table', ['ticBoard']);
 		const mess = C.createElement('div', ['message']);
 		mess.textContent = `Ruch gracza ${this.handleSymbol()}`;
-
+		const LSCont = this.LS.getLSElement();
 		for (let i = 0; i < size; i++) {
 			const row = C.createElement('tr', ['ticRow']);
 
 			for (let k = 0; k < size; k++) {
 				const cell = C.createElement('td', ['ticCell'], `${i}:${k}`);
 				this.cells[i][k] = new Cell(cell, i, k);
-
+				this.cells[i][k].htmlElement.textContent = this.cells[i][k].cellValue;
 				cell.addEventListener('click', e => this.handleClick(e));
 				row.appendChild(cell);
 			}
@@ -144,16 +164,21 @@ class Board {
 		if (root.childElementCount > 1) {
 			let element = document.querySelector('.ticBoard');
 			let mess = document.querySelector('.message');
+			let LSCont = document.querySelector('.localStCont');
 			if (element) {
 				root.removeChild(element);
 			}
 			if (mess) {
 				root.removeChild(mess);
 			}
+			if (LSCont) {
+				root.removeChild(LSCont);
+			}
 		}
 
 		root.appendChild(mess);
 		root.appendChild(board);
+		root.appendChild(LSCont);
 	}
 }
 export { Board };
