@@ -2,22 +2,28 @@ import { Creator as C } from '../Creator';
 import Cell from './Cell';
 import EndGameType from './EndGameType';
 import { TotalBoardClicks } from '../decorators/TotalBoardClicks';
-import { LSUI } from '../SaveOrLoadGame/LSUI';
-import { GameState } from '../SaveOrLoadGame/LocalStorage';
+import { LSUI } from '../saveOrLoadGame/LSUI';
+import { GameState } from '../saveOrLoadGame/LocalStorage';
+import { Undo } from '../undo/Undo';
 class Board {
 	public cells: Cell[][];
 	public isPlayerTurn: boolean;
 	private root: HTMLElement;
 	private size: number = 3;
+
 	public LS: LSUI;
-	private loading: boolean | undefined;
+	public Undo: Undo;
+
 	constructor(root: HTMLElement, size: number) {
 		this.cells = this.initCells(size);
 		this.root = root;
 		this.size = size;
 		this.isPlayerTurn = true;
 		this.LS = new LSUI(this);
+		this.Undo = new Undo(this, this.cells);
+		this.Undo.clear('Undo');
 		this.initBoard(this.root, this.size);
+		this.Undo.saveState('Undo', this.cells);
 	}
 
 	getCells(): Cell[][] {
@@ -51,7 +57,8 @@ class Board {
 		return a;
 	}
 
-	LoadBoardState(state: GameState) {
+	loadBoardState(state: GameState) {
+		this.Undo.clear('Undo');
 		this.isPlayerTurn = state.playerTurn;
 		this.initBoard(this.root, this.size);
 		for (let i = 0; i < this.size; i++) {
@@ -61,6 +68,17 @@ class Board {
 			}
 		}
 	}
+	undo(state: GameState) {
+		this.isPlayerTurn = state.playerTurn;
+		this.initBoard(this.root, this.size);
+		for (let i = 0; i < this.size; i++) {
+			for (let k = 0; k < this.size; k++) {
+				this.cells[i][k].setCellValue(state.cells[i][k].cellValue);
+				this.cells[i][k].htmlElement.textContent = state.cells[i][k].cellValue;
+			}
+		}
+	}
+
 	@TotalBoardClicks()
 	handleClick(e: Event) {
 		let target = e.target as HTMLTableCellElement;
@@ -78,7 +96,7 @@ class Board {
 
 			this.isPlayerTurn = !this.isPlayerTurn;
 			this.handleTurnInfo();
-
+			this.Undo.saveState('Undo', this.cells);
 			this.LS.setCells(this.cells);
 		}
 	}
@@ -148,6 +166,7 @@ class Board {
 		const mess = C.createElement('div', ['message']);
 		mess.textContent = `Ruch gracza ${this.handleSymbol()}`;
 		const LSCont = this.LS.getLSElement();
+		const undo = this.Undo.getUndoElement();
 		for (let i = 0; i < size; i++) {
 			const row = C.createElement('tr', ['ticRow']);
 
@@ -165,6 +184,7 @@ class Board {
 			let element = document.querySelector('.ticBoard');
 			let mess = document.querySelector('.message');
 			let LSCont = document.querySelector('.localStCont');
+			let undo = document.querySelector('.undo');
 			if (element) {
 				root.removeChild(element);
 			}
@@ -174,10 +194,14 @@ class Board {
 			if (LSCont) {
 				root.removeChild(LSCont);
 			}
+			if (undo) {
+				root.removeChild(undo);
+			}
 		}
 
 		root.appendChild(mess);
 		root.appendChild(board);
+		root.appendChild(undo);
 		root.appendChild(LSCont);
 	}
 }

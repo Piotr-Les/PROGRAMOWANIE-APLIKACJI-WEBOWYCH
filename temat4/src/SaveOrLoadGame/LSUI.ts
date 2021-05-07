@@ -21,7 +21,7 @@ class LSUI {
 
 	handleLoadGame(save: GameState) {
 		this.currentSave = save;
-		this.board.LoadBoardState(this.currentSave);
+		this.board.loadBoardState(this.currentSave);
 		let number = this.gameSaves.indexOf(save);
 		LS.deleteItemFromStorage('TicTacToe', save.id);
 		this.gameSaves.splice(number, 1);

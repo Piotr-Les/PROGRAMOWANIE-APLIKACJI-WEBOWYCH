@@ -52,21 +52,38 @@
 	@include mixins.flexCenter();
 	flex-direction: column;
 	.lsSave {
-		margin: 0.5rem;
+		margin: 0.2rem;
 		padding: 0.2rem;
 		cursor: pointer;
 		border: 1px solid var(--borderColor);
+		&:hover {
+			background-color: var(--hoverColor);
+		}
 	}
 	.saveList {
 		list-style: none;
 		& > li {
-			margin: 0.2rem 0;
+			margin: 0.1rem 0;
 			cursor: pointer;
+			&:hover {
+				background-color: var(--hoverColor);
+			}
 		}
 	}
 	.disabled {
 		cursor: not-allowed;
 		pointer-events: none;
 		color: gray !important;
+		&:hover {
+			background-color: none;
+		}
+	}
+}
+.undo {
+	padding: 4px;
+	cursor: pointer;
+	border: 1px solid var(--borderColor);
+	&:hover {
+		background-color: var(--hoverColor);
 	}
 }
