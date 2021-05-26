@@ -1,0 +1,50 @@
+###
+GET http://localhost:3000/products HTTP/1.1
+
+###
+
+POST http://localhost:3000/products HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Telewizor",
+    "description": "Telewizor plazmowy",
+    "price": 5000
+}
+###
+PUT http://localhost:3000/products HTTP/1.1
+content-type: application/json
+
+{
+    "id": 1,
+    "name": "Telewizor zmieniony",
+    "description": "Telewizor plazmowy zmieniony",
+    "price": 3000
+}
+###
+DELETE http://localhost:3000/products/1 HTTP/1.1
+
+//CATEGORY REQUESTS
+###
+GET http://localhost:3000/categories HTTP/1.1
+
+###
+
+POST http://localhost:3000/categories HTTP/1.1
+content-type: application/json
+
+{
+    "name": "RTV"
+    
+}
+###
+PUT http://localhost:3000/categories HTTP/1.1
+content-type: application/json
+
+{
+    "id": 1,
+    "name": "RTV / AGD"
+
+}
+###
+DELETE http://localhost:3000/categories/1 HTTP/1.1
