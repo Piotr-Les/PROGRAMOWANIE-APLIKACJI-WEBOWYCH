@@ -1,0 +1,63 @@
+###
+GET http://localhost:3000/products HTTP/1.1
+
+###
+
+POST http://localhost:3000/products HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Telewizor",
+    "description": "Telewizor plazmowy",
+    "price": 5000,
+    "category": "60c65a1792355d61c88c2fd7"
+}
+
+
+###
+PUT http://localhost:3000/products HTTP/1.1
+content-type: application/json
+
+{
+    "id": "60ae9ecd08037f08c4b74c0e",
+    "name": "TV",
+    "description": "Telewizor plazmowy",
+    "price": 15000
+}
+
+###
+DELETE http://localhost:3000/products HTTP/1.1
+content-type: application/json
+
+{
+    "id": "60c65a4a92355d61c88c2fd8"
+}
+
+
+
+###
+GET http://localhost:3000/categories HTTP/1.1
+
+###
+POST http://localhost:3000/categories HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Sprzęt RTV"
+}
+###
+
+PUT http://localhost:3000/categories HTTP/1.1
+content-type: application/json
+
+{
+    "id" : "60c65a1792355d61c88c2fd7",
+    "name": "AGD"
+}
+###
+DELETE http://localhost:3000/categories HTTP/1.1
+content-type: application/json
+
+{
+    "id" : "60c65a1792355d61c88c2fd7"
+}
