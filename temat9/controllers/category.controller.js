@@ -18,6 +18,7 @@ exports.add = (req, res) => {
 		return true;
 	});
 };
+
 exports.update = (req, res) => {
 	Category.updateOne(
 		{ _id: req.body.id },
